@@ -3,6 +3,7 @@ import { Encode_Sans_Expanded } from "next/font/google";
 import "./globals.css";
 import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
+import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
 const Encode_Sans = Encode_Sans_Expanded({
   subsets: ["latin"],

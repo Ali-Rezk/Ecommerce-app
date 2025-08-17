@@ -17,11 +17,18 @@ import { useForm } from "react-hook-form";
 export default function Register() {
   const form = useForm<registerSchemaFrom>({
     resolver: zodResolver(registerSchema),
-    defaultValues: {},
+    defaultValues: {
+      email: "",
+      name: "",
+      password: "",
+      phone: "",
+      rePassword: "",
+    },
   });
 
   function onSubmit(data: registerSchemaFrom) {
     console.log(data);
+    form.reset();
   }
 
   return (
@@ -33,7 +40,7 @@ export default function Register() {
             name="name"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="my-5">
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <div>
@@ -48,7 +55,7 @@ export default function Register() {
             name="email"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="my-5">
                 <FormLabel>email</FormLabel>
                 <FormControl>
                   <Input type="email" {...field}></Input>
@@ -61,7 +68,7 @@ export default function Register() {
             name="password"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="my-5">
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input type="password" autoComplete="off" {...field}></Input>
@@ -74,7 +81,7 @@ export default function Register() {
             name="rePassword"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="my-5">
                 <FormLabel>Repassword</FormLabel>
                 <FormControl>
                   <Input type="password" autoComplete="off" {...field}></Input>
@@ -87,7 +94,7 @@ export default function Register() {
             name="phone"
             control={form.control}
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="my-5">
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
                   <Input type="phone" {...field}></Input>
