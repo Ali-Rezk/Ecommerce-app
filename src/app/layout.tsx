@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Encode_Sans_Expanded } from "next/font/google";
 import "./globals.css";
+import NavBar from "./_components/NavBar";
+import Footer from "./_components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const Encode_Sans = Encode_Sans_Expanded({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400"],
 });
 
 export const metadata: Metadata = {
@@ -24,10 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${Encode_Sans.className}  antialiased`}>
+        <div className="flex flex-col justify-between min-h-screen">
+          <NavBar />
+          <div className="container">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );
