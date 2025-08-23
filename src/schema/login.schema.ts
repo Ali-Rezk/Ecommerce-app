@@ -6,7 +6,7 @@ export const loginSchema = z.object({
     .string()
     .nonempty("This field is required")
     .regex(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$/,
       "not valid password"
     ),
 });

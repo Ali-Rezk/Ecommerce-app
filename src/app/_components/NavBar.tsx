@@ -1,19 +1,30 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/images/freshcart-logo.svg";
 import Image from "next/image";
-
-const links = [
-  { path: "/", element: "home" },
-  { path: "/products", element: "products" },
-  { path: "/auth/login", element: "login" },
-  { path: "/auth/register", element: "register" },
-];
+import { signOut, useSession } from "next-auth/react";
 
 export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(true);
+  const { data: session, status } = useSession();
+  const links = [
+    { path: "/", element: "home" },
+    { path: "/products", element: "products" },
+
+    { path: "/cart", element: "cart" },
+  ];
+  const auths = [
+    { path: "/auth/login", element: "login" },
+    { path: "/auth/register", element: "register" },
+  ];
+
+  function handleLogout() {
+    signOut({ callbackUrl: "/" });
+  }
   return (
     <nav className="bg-light w-full border-gray-200 dark:bg-gray-900">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl gap-5 flex flex-wrap md:flex-nowrap items-center justify-between mx-auto p-4">
         <Link
           href="https://flowbite.com/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -21,6 +32,7 @@ export default function NavBar() {
           <Image src={logo} alt="Logo" />
         </Link>
         <button
+          onClick={() => setIsOpen(!isOpen)}
           data-collapse-toggle="navbar-default"
           type="button"
           className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -44,8 +56,11 @@ export default function NavBar() {
             />
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <div
+          className={`${!isOpen && "hidden"} w-full md:flex justify-between `}
+          id="navbar-default"
+        >
+          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {links.map((link) => (
               <li key={link.path}>
                 <Link className="text-gray-500 py-2 px-3" href={link.path}>
@@ -53,6 +68,39 @@ export default function NavBar() {
                 </Link>
               </li>
             ))}
+          </ul>
+          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li>
+              <i className="fa-brands fa-facebook"></i>
+            </li>
+            <li>
+              <i className="fa-brands fa-twitter"></i>
+            </li>
+            <li>
+              <i className="fa-brands fa-google"></i>
+            </li>
+
+            {status === "authenticated" ? (
+              <>
+                <li onClick={handleLogout} className="cursor-pointer">
+                  Logout
+                </li>
+                <li>{session?.user?.name}</li>
+                <li>
+                  <Link href={"/cart"}>
+                    cart <i className="fa-solid fa-shopping-cart"></i>
+                  </Link>
+                </li>
+              </>
+            ) : (
+              auths.map((link) => (
+                <li key={link.path}>
+                  <Link className="text-gray-500 py-2 px-3" href={link.path}>
+                    {link.element}
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
         </div>
       </div>

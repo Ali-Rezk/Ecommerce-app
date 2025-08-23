@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
 import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+import NextAuthProviders from "@/providers/components/nextauth.providers";
 
 const Encode_Sans = Encode_Sans_Expanded({
   subsets: ["latin"],
@@ -24,9 +25,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${Encode_Sans.className}  antialiased`}>
         <div className="flex flex-col justify-between min-h-screen">
-          <NavBar />
-          <div className="container">{children}</div>
-          <Footer />
+          <NextAuthProviders>
+            <NavBar />
+            <div className="container">{children}</div>
+            <Footer />
+          </NextAuthProviders>
         </div>
       </body>
     </html>

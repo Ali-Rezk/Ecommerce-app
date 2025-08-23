@@ -13,6 +13,7 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema, loginSchemaFrom } from "@/schema/login.schema";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const form = useForm<loginSchemaFrom>({
@@ -23,9 +24,19 @@ export default function Login() {
     },
   });
 
-  function onSubmit(data: loginSchemaFrom) {
-    console.log(data);
-    form.reset();
+  async function onSubmit(data: loginSchemaFrom) {
+    const res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
+
+    if (res?.ok) {
+      window.location.href = res.url || "";
+    } else {
+      console.log(res?.error);
+    }
   }
 
   return (
