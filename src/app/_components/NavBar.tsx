@@ -82,15 +82,24 @@ export default function NavBar() {
 
             {status === "authenticated" ? (
               <>
+                <li>
+                  <Link href={"/cart"}>
+                    Cart <i className="fa-solid fa-shopping-cart"></i>
+                  </Link>
+                </li>
                 <li onClick={handleLogout} className="cursor-pointer">
                   Logout
                 </li>
                 <li>{session?.user?.name}</li>
-                <li>
-                  <Link href={"/cart"}>
-                    cart <i className="fa-solid fa-shopping-cart"></i>
-                  </Link>
-                </li>
+                {session.user.image && (
+                  <li>
+                    <img
+                      className="size-[20px]"
+                      src={session?.user?.image}
+                      alt=""
+                    />
+                  </li>
+                )}
               </>
             ) : (
               auths.map((link) => (

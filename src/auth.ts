@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Github from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -38,12 +39,25 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
+    Github({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        token.user = user.user;
-        token.token = user.token;
+        if (account?.provider === "github") {
+          token.user = {
+            user: user.name,
+            email: user.email,
+            image: user.image,
+            role: "user",
+          };
+        } else {
+          token.user = user.user;
+          token.token = user.token;
+        }
       }
       return token;
     },

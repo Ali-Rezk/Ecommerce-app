@@ -39,6 +39,10 @@ export default function Login() {
     }
   }
 
+  function handleSignInGitHub() {
+    signIn("github", { callbackUrl: "/" });
+  }
+
   return (
     <>
       <h2 className="my-5">login here</h2>
@@ -77,6 +81,11 @@ export default function Login() {
           </Button>
         </form>
       </Form>
+      <div className="text-center">
+        <Button onClick={handleSignInGitHub} className="">
+          Login with GITHUB <i className="fa-brands fa-github"></i>
+        </Button>
+      </div>
     </>
   );
 }
