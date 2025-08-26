@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ProductItemBtn from "./ProductItemBtn";
 
 export default function ProductItem({
   product,
@@ -30,7 +31,7 @@ export default function ProductItem({
             </span>
           </div>
         </Link>
-        <Button className="my-3">Add to cart</Button>
+        <ProductItemBtn id={product._id}></ProductItemBtn>
       </div>
     </div>
   );

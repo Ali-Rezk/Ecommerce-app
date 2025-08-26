@@ -3,7 +3,7 @@
 import React from "react";
 import { Puff } from "react-loader-spinner";
 
-export default function loading() {
+export default function Loading() {
   return (
     <div className="flex h-[90%] justify-center items-center">
       <Puff

@@ -5,6 +5,8 @@ import NavBar from "./_components/NavBar";
 import Footer from "./_components/Footer";
 import "../../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 import NextAuthProviders from "@/providers/components/nextauth.providers";
+import Providers from "@/providers/components/reactQuery.provider";
+import { ToastContainer } from "react-toastify";
 
 const Encode_Sans = Encode_Sans_Expanded({
   subsets: ["latin"],
@@ -24,13 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${Encode_Sans.className}  antialiased`}>
-        <div className="flex flex-col justify-between min-h-screen">
-          <NextAuthProviders>
-            <NavBar />
-            <div className="container">{children}</div>
-            <Footer />
-          </NextAuthProviders>
-        </div>
+        <Providers>
+          <ToastContainer />
+          <div className="flex flex-col justify-between min-h-screen">
+            <NextAuthProviders>
+              <NavBar />
+              <div className="container">{children}</div>
+              <Footer />
+            </NextAuthProviders>
+          </div>
+        </Providers>
       </body>
     </html>
   );

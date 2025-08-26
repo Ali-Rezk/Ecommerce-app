@@ -1,5 +1,6 @@
 import React from "react";
+import Cart from "./_components/Cart";
 
 export default function cart() {
-  return <div>cart</div>;
+  return <Cart></Cart>;
 }
