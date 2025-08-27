@@ -11,7 +11,7 @@ export default function ProductItemBtn({ id }: { id: string }) {
     mutationFn: addProduct,
     onSuccess: (data) => {
       toast.success(data.message);
-      QueryClient.invalidateQueries({ queryKey: ["/cart"] });
+      QueryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: () => {
       toast.error("Failed to add product to cart");

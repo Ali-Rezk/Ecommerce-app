@@ -4,16 +4,22 @@ import React, { useState } from "react";
 import logo from "../../assets/images/freshcart-logo.svg";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import { CartRes } from "../cart/types/cart.interface";
 
 export default function NavBar() {
+  const { data, isLoading, isError, error } = useQuery<CartRes>({
+    queryKey: ["cart"],
+    queryFn: async () => {
+      const res = await fetch("/api/cart");
+      const payload = await res.json();
+      return payload;
+    },
+  });
+
   const [isOpen, setIsOpen] = useState(true);
   const { data: session, status } = useSession();
-  const links = [
-    { path: "/", element: "home" },
-    { path: "/products", element: "products" },
-
-    { path: "/cart", element: "cart" },
-  ];
+  const links = [{ path: "/products", element: "Products" }];
   const auths = [
     { path: "/auth/login", element: "login" },
     { path: "/auth/register", element: "register" },
@@ -26,7 +32,7 @@ export default function NavBar() {
     <nav className="bg-light w-full border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl gap-5 flex flex-wrap md:flex-nowrap items-center justify-between mx-auto p-4">
         <Link
-          href="https://flowbite.com/"
+          href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <Image src={logo} alt="Logo" />
@@ -83,8 +89,11 @@ export default function NavBar() {
             {status === "authenticated" ? (
               <>
                 <li>
-                  <Link href={"/cart"}>
-                    Cart <i className="fa-solid fa-shopping-cart"></i>
+                  <Link href={"/cart"} className="relative">
+                    <i className="fa-solid fa-shopping-cart"></i>
+                    <span className="absolute -top-2 -right-4 h-5 w-5 flex justify-center items-center bg-red-500 text-white rounded-full px-1 text-xs">
+                      {data?.numOfCartItems || 0}
+                    </span>
                   </Link>
                 </li>
                 <li onClick={handleLogout} className="cursor-pointer">

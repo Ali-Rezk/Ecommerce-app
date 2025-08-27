@@ -24,7 +24,14 @@ export default function ProductItem({
           <span className="text-main">{product.category.name}</span>
           <p className="line-clamp-1">{product.title}</p>
           <div className="flex justify-between my-5 items-center">
-            <span className="">{product.price}EGP</span>
+            <span
+              className={`${product.priceAfterDiscount ? "line-through" : ""}`}
+            >
+              {product.price} EGP
+            </span>
+            {product.priceAfterDiscount && (
+              <span>{product.priceAfterDiscount} EGP</span>
+            )}
             <span className="">
               {product.ratingsAverage}
               <i className="fa-solid  fa-star text-rating"></i>
