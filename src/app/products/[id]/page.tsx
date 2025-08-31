@@ -2,8 +2,12 @@ import { getSingleProduct, ProductInterface } from "@/apis/products.api";
 import Image from "next/image";
 import React from "react";
 
-export default async function page({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
   const data: ProductInterface = await getSingleProduct(id);
 
   return (

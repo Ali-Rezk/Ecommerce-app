@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import { clearCart } from "../_actions/clearCart.action";
 import { updateCount } from "../_actions/updateItemCount.action";
+import Link from "next/link";
 
 export default function Cart() {
   const { data, isLoading, isError, error } = useQuery<CartRes>({
@@ -98,6 +99,9 @@ export default function Cart() {
         ) : (
           "Clear cart"
         )}
+      </Button>
+      <Button className="ml-auto block my-2 cursor-pointer">
+        <Link href={`/checkout/${data?.cartId}`}>checkout</Link>
       </Button>
     </div>
   );
