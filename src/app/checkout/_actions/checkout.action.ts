@@ -1,13 +1,12 @@
+"use server";
 import { addressSchemaFrom } from "@/schema/address.schema";
 import { getAuthToken } from "@/utils/getTokenAuth";
 
 export async function checkoutOnline({
   cartId,
-  url,
   shippingAddress,
 }: {
   cartId: string;
-  url: string;
   shippingAddress: addressSchemaFrom;
 }) {
   const token = await getAuthToken();
@@ -16,10 +15,11 @@ export async function checkoutOnline({
     throw new Error("unAuthorized! login first");
   }
   const res = await fetch(
-    `${process.env.API}/orders/checkout-session/${cartId}?url=${url}`,
+    `${process.env.API}/orders/checkout-session/${cartId}?url=${process.env.NEXT_URL}`,
     {
       method: "POST",
       headers: {
+        token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -28,6 +28,7 @@ export async function checkoutOnline({
     }
   );
   const data = await res.json();
+  console.log(data);
 
   return data;
 }

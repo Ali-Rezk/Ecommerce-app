@@ -5,7 +5,7 @@ export async function getAuthToken() {
   const cookieName =
     process.env.NODE_ENV === "production"
       ? "__Secure-next-auth.session-token"
-      : "next-auth.session-token-dev";
+      : "next-auth.session-token";
 
   const authToken = (await cookies()).get(cookieName)?.value;
 
@@ -14,5 +14,5 @@ export async function getAuthToken() {
     secret: process.env.NEXTAUTH_SECRET!,
   });
 
-  return token?.token;
+  return token?.token as string;
 }

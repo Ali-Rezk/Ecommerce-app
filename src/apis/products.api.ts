@@ -30,7 +30,7 @@ export interface ProductInterface {
   updatedAt: string;
   id: string;
   priceAfterDiscount?: number;
-  availableColors?: any[];
+  availableColors?: string[];
 }
 
 export interface Subcategory {
@@ -64,6 +64,12 @@ export async function getProducts() {
 
 export async function getSingleProduct(prodId: string) {
   const res = await fetch(`${baseURL}/api/v1/products/${prodId}`);
+  const { data } = await res.json();
+  return data;
+}
+
+export async function getProductInCategory(catId: string) {
+  const res = await fetch(`${baseURL}/api/v1/products?category[in]=${catId}`);
   const { data } = await res.json();
   return data;
 }

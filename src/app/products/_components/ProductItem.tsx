@@ -13,7 +13,7 @@ export default function ProductItem({
   return (
     <div className="w-1/2 md:w-1/3 lg:w-1/6 ">
       <div className="p-5">
-        <Link href={`products/${product._id}`}>
+        <Link href={`/products/${product._id}/${product.category._id}`}>
           <Image
             width={300}
             height={300}

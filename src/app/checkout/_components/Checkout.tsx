@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,18 +16,22 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { checkoutOnline } from "../_actions/checkout.action";
 
-export default function Checkout() {
+export default function Checkout({ cartId }: { cartId: string }) {
   const form = useForm<addressSchemaFrom>({
     resolver: zodResolver(addressSchema),
     defaultValues: { details: "", city: "", phone: "" },
   });
 
-  function onSubmit(data: addressSchemaFrom) {
-    // checkoutOnline({
-    //   cartId: "cart-id",
-    //   url: "checkout-url",
-    //   shippingAddress: data,
-    // });
+  async function onSubmit(data: addressSchemaFrom) {
+    const res = await checkoutOnline({
+      cartId: cartId,
+      shippingAddress: data,
+    });
+    if (res.status === "success") {
+      window.location.href = res.session.url;
+    } else {
+      // Handle checkout error
+    }
   }
 
   return (

@@ -6,11 +6,10 @@ export default async function page({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { data } = await params;
-  console.log(data);
+  const { id } = await params;
   return (
     <div>
-      <Checkout />
+      <Checkout cartId={id} />
     </div>
   );
 }
