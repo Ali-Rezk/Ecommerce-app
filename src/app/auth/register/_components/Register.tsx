@@ -27,7 +27,6 @@ export default function Register() {
   });
 
   function onSubmit(data: registerSchemaFrom) {
-    console.log(data);
     form.reset();
   }
 
