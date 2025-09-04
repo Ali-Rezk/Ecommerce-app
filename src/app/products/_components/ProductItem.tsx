@@ -1,9 +1,9 @@
 import { ProductInterface } from "@/apis/products.api";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ProductItemBtn from "./ProductItemBtn";
+import HeartItem from "@/app/_components/HeartItem";
 
 export default function ProductItem({
   product,
@@ -13,6 +13,7 @@ export default function ProductItem({
   return (
     <div className="w-1/2 md:w-1/3 lg:w-1/6 ">
       <div className="p-5">
+        <HeartItem />
         <Link href={`/products/${product._id}/${product.category._id}`}>
           <Image
             width={300}
