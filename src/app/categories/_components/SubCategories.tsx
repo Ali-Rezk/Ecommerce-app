@@ -13,6 +13,14 @@ export default function SubCategories() {
     queryFn: () => getSubCategories(SubCategories.id),
   });
 
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bg-gray-800 opacity-75 flex items-center justify-center z-50">
+        <i className="fa-solid fa-spinner fa-spin text-white text-4xl"></i>
+      </div>
+    );
+  }
+
   return (
     <>
       <h2 className="p-5 text-center text-main font-semibold">

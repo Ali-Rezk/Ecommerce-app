@@ -19,7 +19,10 @@ export default function NavBar() {
 
   const [isOpen, setIsOpen] = useState(true);
   const { data: session, status } = useSession();
-  const links = [{ path: "/products", element: "Products" }];
+  const links = [
+    { path: "/products", element: "Products" },
+    { path: "/categories", element: "Categories" },
+  ];
   const auths = [
     { path: "/auth/login", element: "login" },
     { path: "/auth/register", element: "register" },
