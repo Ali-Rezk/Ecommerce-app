@@ -169,3 +169,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.imgCard:hover {
+  box-shadow: 1px 1px 10px #0aad0a;
+}
+
+.cardImage {
+  object-fit: cover;
+  object-position: center;
+}
