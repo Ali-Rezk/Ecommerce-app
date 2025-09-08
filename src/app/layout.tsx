@@ -8,6 +8,7 @@ import NextAuthProviders from "@/providers/components/nextauth.providers";
 import Providers from "@/providers/components/reactQuery.provider";
 import { ToastContainer } from "react-toastify";
 import SubCategoriesProvider from "./context/SubCategoriesContext";
+import BrandsProvider from "./context/BrandsContext";
 
 const Encode_Sans = Encode_Sans_Expanded({
   subsets: ["latin"],
@@ -30,13 +31,14 @@ export default function RootLayout({
         <Providers>
           <ToastContainer />
           <SubCategoriesProvider>
-            <div className="flex flex-col justify-between min-h-screen">
-              <NextAuthProviders>
-                <NavBar />
-                <div className="container">{children}</div>
-                <Footer />
-              </NextAuthProviders>
-            </div>
+            <BrandsProvider>
+              <div className="min-h-screen">
+                <NextAuthProviders>
+                  <NavBar />
+                  <div className="container">{children}</div>
+                </NextAuthProviders>
+              </div>
+            </BrandsProvider>
           </SubCategoriesProvider>
         </Providers>
       </body>

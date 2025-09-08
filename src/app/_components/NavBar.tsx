@@ -22,6 +22,7 @@ export default function NavBar() {
   const links = [
     { path: "/products", element: "Products" },
     { path: "/categories", element: "Categories" },
+    { path: "/brands", element: "Brands" },
   ];
   const auths = [
     { path: "/auth/login", element: "login" },
