@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema, loginSchemaFrom } from "@/schema/login.schema";
 import { signIn } from "next-auth/react";
+import { forgotPassword } from "@/apis/forgotPassword.api";
 
 export default function Login() {
   const form = useForm<loginSchemaFrom>({
@@ -41,6 +42,11 @@ export default function Login() {
 
   function handleSignInGitHub() {
     signIn("github", { callbackUrl: "/" });
+  }
+
+  async function handleForgotPassword(email: string) {
+    await forgotPassword(email);
+    // window.location.href = "/auth/forgot-password";
   }
 
   return (
@@ -81,7 +87,13 @@ export default function Login() {
           </Button>
         </form>
       </Form>
-      <div className="text-center">
+      <div className="flex justify-between mx-auto w-1/3">
+        <button
+          onClick={() => handleForgotPassword(form.getValues("email"))}
+          className="text-sm text-gray-500 hover:underline cursor-pointer"
+        >
+          Forgot password?
+        </button>
         <Button onClick={handleSignInGitHub} className="">
           Login with GITHUB <i className="fa-brands fa-github"></i>
         </Button>
