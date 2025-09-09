@@ -73,3 +73,37 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+
+export async function registerUser(data: {
+  email: string;
+  name: string;
+  password: string;
+  phone: string;
+  rePassword: string;
+}) {
+  const res = await fetch(
+    `https://ecommerce.routemisr.com/api/v1/auth/signup`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const payload = await res.json();
+
+  if (payload.message === "success") {
+    const decode = JSON.parse(
+      Buffer.from(payload.token.split(".")[1], "base64").toString()
+    );
+    return {
+      id: decode.id,
+      user: payload.user,
+      token: payload.token,
+    };
+  } else {
+    throw new Error(payload.message);
+  }
+}

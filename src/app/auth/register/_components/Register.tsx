@@ -9,12 +9,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, registerSchemaFrom } from "@/schema/register.schema";
 import { useForm } from "react-hook-form";
+import { registerUser } from "@/auth";
 
 export default function Register() {
+  const [message, setMessage] = useState<string | null>(null);
   const form = useForm<registerSchemaFrom>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -26,13 +28,24 @@ export default function Register() {
     },
   });
 
-  function onSubmit(data: registerSchemaFrom) {
-    form.reset();
+  async function onSubmit(data: registerSchemaFrom) {
+    try {
+      const user = await registerUser(data);
+      setMessage("Registration successful! Welcome, " + user.user.name);
+      form.reset();
+    } catch (error) {
+      if (error instanceof Error) {
+        setMessage(error.message || "Registration failed.");
+      } else {
+        setMessage("An unknown error occurred.");
+      }
+    }
   }
 
   return (
     <>
       <h2 className="my-5">Register here</h2>
+      {message && <p className="my-3 text-center text-main">{message}</p>}
       <Form {...form}>
         <form className="w-1/3 mx-auto" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
