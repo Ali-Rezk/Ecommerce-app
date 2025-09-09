@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { resetCode } from "@/apis/forgotPassword.api";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
-import { Button } from "@mui/material";
 
 export default function VerificationCodeInput() {
   const [code, setCode] = useState("");
@@ -16,8 +15,10 @@ export default function VerificationCodeInput() {
 
     try {
       const response = await resetCode(code);
-      toast.success("Verification successful!");
-      console.log("Response:", response);
+      if (response.status === 200) {
+        toast.success("Verification successful!");
+        window.location.href = "/auth/reset-password";
+      }
     } catch (error) {
       toast.error("Verification failed. Please try again.");
       console.error("Error:", error);

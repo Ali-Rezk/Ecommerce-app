@@ -1,4 +1,4 @@
-import VerificationCodeInput from "./VerificationCodeInput";
+import VerificationCodeInput from "./_components/VerificationCodeInput";
 
 export default function ForgotPasswordPage() {
   return (

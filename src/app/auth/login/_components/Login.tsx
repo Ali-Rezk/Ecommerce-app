@@ -46,7 +46,7 @@ export default function Login() {
 
   async function handleForgotPassword(email: string) {
     await forgotPassword(email);
-    // window.location.href = "/auth/forgot-password";
+    window.location.href = "/auth/forgot-password";
   }
 
   return (
