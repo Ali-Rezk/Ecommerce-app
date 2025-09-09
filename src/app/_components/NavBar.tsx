@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CartRes } from "../cart/types/cart.interface";
 
 export default function NavBar() {
-  const { data, isLoading, isError, error } = useQuery<CartRes>({
+  const { data } = useQuery<CartRes>({
     queryKey: ["cart"],
     queryFn: async () => {
       const res = await fetch("/api/cart");
@@ -98,10 +98,12 @@ export default function NavBar() {
                 <li>{session?.user?.name}</li>
                 {session.user.image && (
                   <li>
-                    <img
+                    <Image
                       className="size-[20px]"
                       src={session?.user?.image}
                       alt=""
+                      width={20}
+                      height={20}
                     />
                   </li>
                 )}

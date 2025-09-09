@@ -11,9 +11,9 @@ export default function ProductItem({
   product: ProductInterface;
 }) {
   return (
-    <div className="w-1/2 md:w-1/3 lg:w-1/6 ">
+    <div className="w-1/2 md:w-1/3 lg:w-1/4 ">
       <div className="p-5">
-        <HeartItem />
+        <HeartItem id={product._id} />
         <Link href={`/products/${product._id}/${product.category._id}`}>
           <Image
             width={300}
