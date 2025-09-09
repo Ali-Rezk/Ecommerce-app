@@ -5,8 +5,6 @@ import React from "react";
 import Image from "next/image";
 import emptyCart from "../../../assets/images/empty cart.jpg";
 import { toast } from "react-toastify";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import {
   deleteWishlistItem,
   getWishlist,
@@ -40,7 +38,7 @@ export default function Wishlist() {
     <div className=" flex justify-center items-center mt-12">
       <div className=" p-10 bg-gray-100 w-full">
         <h2 className="font-bold py-5">My wishlist</h2>
-        <div className="flex items-center">
+        <div className="flex flex-wrap items-center">
           {data?.map((item: WishlistItemType) => (
             <WishlistItem key={item._id} item={item} />
           ))}
