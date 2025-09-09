@@ -17,9 +17,11 @@ export default function NavBar() {
     },
   });
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
   const links = [
+    { path: "/", element: "Home" },
+    { path: "/wishlist", element: "Wishlist" },
     { path: "/products", element: "Products" },
     { path: "/categories", element: "Categories" },
     { path: "/brands", element: "Brands" },
@@ -67,10 +69,10 @@ export default function NavBar() {
           </svg>
         </button>
         <div
-          className={`${!isOpen && "hidden"} w-full md:flex justify-between `}
+          className={`${!isOpen && "hidden"} w-full md:flex justify-around `}
           id="navbar-default"
         >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <ul className="font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 border border-gray-100 rounded-lg gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {links.map((link) => (
               <li key={link.path}>
                 <Link className="text-gray-500 py-2 px-3" href={link.path}>
@@ -79,17 +81,7 @@ export default function NavBar() {
               </li>
             ))}
           </ul>
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <i className="fa-brands fa-facebook"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-twitter"></i>
-            </li>
-            <li>
-              <i className="fa-brands fa-google"></i>
-            </li>
-
+          <ul className="font-medium flex flex-col md:flex-row p-4 md:p-0 mt-4 border border-gray-100 rounded-lg gap-5 md:mt-0 md:border-0  dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {status === "authenticated" ? (
               <>
                 <li>

@@ -18,8 +18,6 @@ export default function ProductItemBtn({ id }: { id: string }) {
     },
   });
 
-  console.log(data);
-
   return (
     <Button className="w-full" onClick={() => mutate(id)} disabled={isPending}>
       Add to cart{" "}
