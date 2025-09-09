@@ -17,7 +17,6 @@ export default function ResetPasswordForm() {
     try {
       const response = await resetPassword(email, newPassword);
       toast.success("Password reset successful!");
-      console.log("Response:", response);
     } catch (error) {
       toast.error("Password reset failed. Please try again.");
       console.error("Error:", error);

@@ -64,7 +64,6 @@ export async function addWishlistItem(productId: string) {
   });
 
   const payload = await res.json();
-  console.log("add:", payload);
   return payload;
 }
 
@@ -85,7 +84,6 @@ export async function deleteWishlistItem(productId: string) {
   });
 
   const payload = await res.json();
-  console.log("delete:", payload);
   return payload;
 }
 
@@ -105,6 +103,5 @@ export async function getWishlist() {
   });
 
   const { data } = await res.json();
-  console.log("get:", data);
   return data;
 }
