@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import logo from "../../assets/images/freshcart-logo.svg";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";

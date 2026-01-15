@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { loginSchema, loginSchemaFrom } from "@/schema/login.schema";
@@ -17,6 +17,8 @@ import { signIn } from "next-auth/react";
 import { forgotPassword } from "@/apis/forgotPassword.api";
 
 export default function Login() {
+  const [error, setError] = useState<string | null>(null);
+
   const form = useForm<loginSchemaFrom>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -36,7 +38,7 @@ export default function Login() {
     if (res?.ok) {
       window.location.href = res.url || "";
     } else {
-      console.log(res?.error);
+      setError(res?.error || "An unknown error occurred");
     }
   }
 
@@ -52,6 +54,12 @@ export default function Login() {
   return (
     <>
       <h2 className="my-5">login here</h2>
+
+      {error && (
+        <div className="w-1/3 mx-auto">
+          <p className="text-red-500 my-2 ">{error}</p>
+        </div>
+      )}
       <Form {...form}>
         <form className="w-1/3 mx-auto" onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
