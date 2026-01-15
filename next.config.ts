@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         pathname: "/Route-Academy-products/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
     ],
   },
 };

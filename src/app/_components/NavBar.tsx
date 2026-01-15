@@ -97,13 +97,13 @@ export default function NavBar() {
                 </li>
                 <li>{session?.user?.name}</li>
                 {session.user.image && (
-                  <li>
+                  <li className="">
                     <Image
-                      className="size-[20px]"
+                      className="size-[25px] rounded-full"
                       src={session?.user?.image}
                       alt=""
-                      width={20}
-                      height={20}
+                      width={25}
+                      height={25}
                     />
                   </li>
                 )}

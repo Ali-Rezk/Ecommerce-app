@@ -94,7 +94,7 @@ export default function Login() {
         >
           Forgot password?
         </button>
-        <Button onClick={handleSignInGitHub} className="">
+        <Button onClick={handleSignInGitHub} className="hover:cursor-pointer">
           Login with GITHUB <i className="fa-brands fa-github"></i>
         </Button>
       </div>
