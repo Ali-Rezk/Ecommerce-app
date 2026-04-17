@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FreshCart — E-Commerce App
+
+A full-featured e-commerce web application built with modern web technologies, offering product browsing, cart management, wishlists, authentication, and online/cash checkout.
+
+---
+
+## Features
+
+- **Authentication** — Email/password & GitHub OAuth login via NextAuth.js
+- **Product Browsing** — Browse products, categories, and brands with detailed views
+- **Shopping Cart** — Add, update, and remove items; persistent cart via API routes
+- **Wishlist** — Save and manage favourite products
+- **Checkout** — Cash on delivery and online payment options
+- **Forgot/Reset Password** — Email-based OTP verification flow
+- **Responsive UI** — Mobile-first, fully responsive layout
+
+---
+
+## Tech Stack
+
+| Category            | Technology                                                                                                      |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Framework**       | [Next.js 15](https://nextjs.org/) (App Router)                                                                  |
+| **Language**        | [TypeScript 5](https://www.typescriptlang.org/)                                                                 |
+| **Styling**         | [Tailwind CSS v4](https://tailwindcss.com/), [MUI (Material UI) v7](https://mui.com/)                           |
+| **UI Components**   | [Radix UI](https://www.radix-ui.com/), [Lucide React](https://lucide.dev/), [shadcn/ui](https://ui.shadcn.com/) |
+| **Icons**           | [Font Awesome 7](https://fontawesome.com/)                                                                      |
+| **Authentication**  | [NextAuth.js v4](https://next-auth.js.org/) (Credentials + GitHub OAuth)                                        |
+| **Data Fetching**   | [TanStack React Query v5](https://tanstack.com/query/latest)                                                    |
+| **Forms**           | [React Hook Form v7](https://react-hook-form.com/)                                                              |
+| **Validation**      | [Zod v4](https://zod.dev/)                                                                                      |
+| **Notifications**   | [React Toastify](https://fkhadra.github.io/react-toastify/)                                                     |
+| **Slider/Carousel** | [Swiper.js](https://swiperjs.com/)                                                                              |
+| **Fonts**           | Google Fonts — Encode Sans Expanded (via `next/font`)                                                           |
+| **Linting**         | ESLint 9 with `eslint-config-next`                                                                              |
+
+---
+
+## Project Structure
+
+```
+src/
+├── apis/              # API helper functions (products, brands, categories, wishlist…)
+├── app/               # Next.js App Router pages & layouts
+│   ├── _components/   # Shared UI components (NavBar, Footer, Slider…)
+│   ├── auth/          # Login, Register, Forgot/Reset Password pages
+│   ├── brands/        # Brands listing page
+│   ├── cart/          # Cart page & server actions
+│   ├── categories/    # Categories & Sub-categories pages
+│   ├── checkout/      # Checkout page & server actions (cash & online)
+│   ├── products/      # Products listing & detail pages
+│   ├── wishlist/      # Wishlist page
+│   └── api/           # Next.js API routes (cart, NextAuth)
+├── components/ui/     # Reusable shadcn/ui primitive components
+├── providers/         # React context providers (NextAuth, React Query)
+├── schema/            # Zod validation schemas
+├── types/             # Global TypeScript type declarations
+└── utils/             # Utility helpers (e.g., token extraction)
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start the production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file in the root with:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+API=<your_backend_api_base_url>
+NEXTAUTH_SECRET=<your_nextauth_secret>
+NEXTAUTH_URL=http://localhost:3000
+GITHUB_ID=<your_github_oauth_app_id>
+GITHUB_SECRET=<your_github_oauth_app_secret>
+```
